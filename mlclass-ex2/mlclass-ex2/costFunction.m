@@ -19,13 +19,25 @@ grad = zeros(size(theta));
 %
 % Note: grad should have the same dimensions as theta
 %
+% 100 X 3 matrix X, 
 
+sum =0; 
+for i=1:m
+	h_theta = sigmoid(X(i, :)* theta);
+	sum = sum + ((-y(i, 1) * log(h_theta)) - ((1-y(i,1))* log(1-h_theta))); 
+end
 
+J = sum / m; 
 
+% Calculate the gradient
 
-
-
-
+for j=1:length(theta)
+	sum = 0;
+	for i =1:m 
+		sum = sum + (sigmoid(X(i, :) * theta) - y(i, :)) * X(i, j); 
+	end
+	grad(j, 1) = sum / m; 
+end
 
 % =============================================================
 
